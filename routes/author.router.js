@@ -11,7 +11,3 @@ router.put(`/:id`, authorCtrl.updateAuthor);
 router.delete(`/:id`, authorCtrl.deleteAuthor);
 
 module.exports = router;
-
-// router.get(`/`, (req, res) => {
-//   res.send(`Author API`);
-// });

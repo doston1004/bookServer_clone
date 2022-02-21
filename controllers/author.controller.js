@@ -12,9 +12,9 @@ const authorCtrl = {
   },
   createAuthor: async (req, res) => {
     try {
-      const { authorName } = req.body;
+      const { name } = req.body;
 
-      const author = await Author.create({ authorName });
+      const author = await Author.create({ name });
 
       res.json({ message: `Created author`, author });
     } catch (err) {
@@ -23,7 +23,7 @@ const authorCtrl = {
   },
   updateAuthor: async (req, res) => {
     try {
-      const id = req.params.id;
+      const id = await Author.findByIdAndUpdate(req.params.id);
 
       res.json({ message: `Updated author`, authorId: id });
     } catch (err) {
@@ -32,6 +32,7 @@ const authorCtrl = {
   },
   deleteAuthor: async (req, res) => {
     try {
+      const deletedAuthor = await Author.findByIdAndRemove(req.params.id);
       res.json({ message: `Deleted author` });
     } catch (err) {
       res.status(500).json({ message: `Internal server error` });

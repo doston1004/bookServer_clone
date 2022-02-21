@@ -1,3 +1,4 @@
+const res = require("express/lib/response");
 const Book = require(`../models/book.model`);
 
 const bookCtrl = {
@@ -6,6 +7,14 @@ const bookCtrl = {
       const books = await Book.find();
 
       res.json({ books });
+    } catch (err) {
+      res.status(500).json({ message: `Internal server error` });
+    }
+  },
+
+  getBook: async (req, res) => {
+    try {
+      const book = await Book.findById(req.params.id)
     } catch (err) {
       res.status(500).json({ message: `Internal server error` });
     }
@@ -23,8 +32,7 @@ const bookCtrl = {
   },
   updateBook: async (req, res) => {
     try {
-      const id = req.params.id;
-
+      const id = await Book.findByIdAndUpdate (req.params.id);
       res.json({ message: `Updated book...` });
     } catch (err) {
       res.status(500).json({ message: `Internal server error...` });
@@ -32,6 +40,7 @@ const bookCtrl = {
   },
   deleteBook: async (req, res) => {
     try {
+      const deletedBook = await Book.findByIdAndRemove(req.params.id)
       res.json({ message: `Deleted book` });
     } catch (err) {
       res.status(500).json({ message: `Internal server error` });

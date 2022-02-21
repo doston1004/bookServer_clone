@@ -5,7 +5,6 @@ const userCtrl = {
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
-
       res.json({ users });
     } catch (err) {
       res.status(500).json({ message: `Internal server error...` });
@@ -14,7 +13,6 @@ const userCtrl = {
   createUser: async (req, res) => {
     try {
       const { username } = req.body;
-
       const user = await User.create({ userName });
       res.json({ message: `Created user`, user });
     } catch (err) {
@@ -23,8 +21,7 @@ const userCtrl = {
   },
   updateUser: async (req, res) => {
     try {
-      const id = req.params.id;
-
+      const id = await User.findByIdAndUpdate(req.params.id);
       res.json({ message: `Updated user` });
     } catch (err) {
       res.status(500).json({ message: `Internal server error...` });
@@ -32,6 +29,7 @@ const userCtrl = {
   },
   deleteUser: async (req, res) => {
     try {
+      const deletedUser = await User.findByIdAndRemove(req.params.id);
       res.json({ message: `Deleted user` });
     } catch (err) {
       res.status(500).json({ message: `Internal server error` });

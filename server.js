@@ -15,9 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 //Routes
 app.use(`/api`, routes);
 
-app.get(`/`, (req, res) => {
-  res.send(`Hello World!`);
-});
 
 // Database connection
 const db = async () => {
@@ -35,5 +32,5 @@ db();
 //Server listening
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
-  console.log(`Server started listening at the port ${PORT}...`)
+  console.log(`Server started listening on the port ${PORT}...`)
 );
