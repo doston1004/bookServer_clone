@@ -6,7 +6,6 @@ const authorRouter = require(`./author.router`);
 
 router.use(`/users`, userRouter);
 router.use(`/books`, bookRouter);
-router.use(`/auhtors`, authorRouter);
+router.use(`/authors`, authorRouter);
 
 module.exports = router;
-

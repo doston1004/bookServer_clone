@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 //Routes
 app.use(`/api`, routes);
 
-
 // Database connection
 const db = async () => {
   try {
